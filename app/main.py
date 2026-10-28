@@ -35,8 +35,17 @@ def _message_parts(event):
 
 
 def main():
-    if not VK_TOKEN or VK_GROUP_ID <= 0:
-        raise SystemExit("Заполни VK_TOKEN и VK_GROUP_ID в .env. Токен не публикуй.")
+    missing = []
+    if not VK_TOKEN:
+        missing.append("VK_TOKEN")
+    if VK_GROUP_ID <= 0:
+        missing.append("VK_GROUP_ID (должен быть числовым ID сообщества)")
+    if missing:
+        # Never print the token or its contents to logs.
+        raise SystemExit(
+            "Не найдены или некорректны настройки окружения: " + ", ".join(missing) +
+            ". Проверь переменные окружения Bothost; секретные значения не публикуй."
+        )
 
     session = vk_api.VkApi(token=VK_TOKEN, api_version=VK_API_VERSION)
     client = VKClient(session, VK_API_VERSION)
