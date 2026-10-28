@@ -101,9 +101,9 @@ def main():
             if lower in {"/help", "ℹ️ помощь", "помощь"}:
                 send(
                     peer_id,
-                    "Как пользоваться:\\n1. Отправь ссылку на видео.\\n"
-                    "2. Выбери 1080p, 720p или 480p.\\n"
-                    f"3. Лимит: {MAX_FILE_MB} МБ и {MAX_DURATION_SECONDS // 60} минут.\\n\\n"
+                    "Как пользоваться:\n1. Отправь ссылку на видео.\n"
+                    "2. Выбери 1080p, 720p или 480p.\n"
+                    f"3. Лимит: {MAX_FILE_MB} МБ и {MAX_DURATION_SECONDS // 60} минут.\n\n"
                     "Поддержка зависит от сайта. Не отправляй закрытый контент и не обходи ограничения доступа.",
                     main_keyboard(),
                 )
@@ -148,10 +148,10 @@ def main():
                 with pending_lock:
                     pending[peer_id] = result
                 duration = info.get("duration")
-                duration_text = f"\\nДлительность: {int(duration // 60)} мин {int(duration % 60)} сек" if duration else ""
+                duration_text = f"\nДлительность: {int(duration // 60)} мин {int(duration % 60)} сек" if duration else ""
                 send(
                     peer_id,
-                    f"Видео найдено: {info['title']}{duration_text}\\nВыбери максимальное разрешение:",
+                    f"Видео найдено: {info['title']}{duration_text}\nВыбери максимальное разрешение:",
                     quality_keyboard(),
                 )
                 continue
