@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / ".env", override=False)
 
 VK_TOKEN = os.getenv("VK_TOKEN", "").strip()
 VK_GROUP_ID = int(os.getenv("VK_GROUP_ID", "0") or 0)
